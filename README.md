@@ -1,5 +1,5 @@
-##Somatic SV Workflow
+## Somatic SV Workflow
 
-###SV Caller:
+### SV Caller:
 - Manta 1.2.1
 
