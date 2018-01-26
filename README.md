@@ -13,12 +13,17 @@ Only select the variants which pass the following criteria:
 
 1. Pull the docker image
 
-```
-docker pull wwliao/somatic_sv_workflow
-```
+    ```
+    docker pull wwliao/somatic_sv_workflow
+    ```
 
 2. Run Manta in the docker container
 
-```
-docker run -v /path/to/workspace:/mnt/data wwliao/somatic_sv_workflow manta patient_1.tumor.bam patient_1.normal.bam hg19.fa patient_1 8
-```
+    ```
+    docker run -v /path/to/workspace:/mnt/data wwliao/somatic_sv_workflow \
+        manta patient_1.tumor.bam \
+              patient_1.normal.bam \
+              hg19.fa \
+              patient_1 \
+              8
+    ```
