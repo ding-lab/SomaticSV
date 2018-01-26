@@ -27,3 +27,8 @@ Only select the variants which pass the following criteria:
               patient_1 \
               8
     ```
+
+### TO DO
+- Figure out how to use BreakTrans to validate transcript fusions with structural variants
+- Test novoBreak
+- Merge calls comming from DELLY, Manta, novoBreak
