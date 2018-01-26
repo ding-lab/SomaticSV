@@ -17,5 +17,6 @@ RUN conda install manta cyvcf2 libgfortran=1 numpy=1.10.0
 WORKDIR /home/biodocker
 
 COPY filter_vcf.py .
+COPY manta bin
 
 USER root

@@ -1,0 +1,10 @@
+#/bin/bash
+
+TUMOR=$1
+NORMAL=$2
+REF=$3
+OUTPUT=$4
+CPU=$5
+
+configManta.py --tumorBam $TUMOR --normalBam $NORMAL --referenceFasta $REF --runDir $OUTPUT && \
+$OUTPUT/runWorkflow.py -m local -j $CPU
