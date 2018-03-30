@@ -1,7 +1,7 @@
 ## Somatic SV Workflow
 
 ### SV Caller
-- Manta 1.2.1
+- Manta 1.3.2
 
 ### Filtering Variants
 Only select the variants which pass the following criteria:
