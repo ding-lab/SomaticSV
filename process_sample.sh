@@ -13,6 +13,13 @@ OUTD="./output"
 OUTVCF="final.SV.WGS.vcf"
 CPU="4"
 
+# Load the conda environment
+# It would be better to do this in Docker image...
+if [ -z "$CONDA_DEFAULT_ENV" ]; then
+    source /opt/conda/bin/activate base
+fi
+
+
 # http://wiki.bash-hackers.org/howto/getopts_tutorial
 while getopts ":vo:c:f:" opt; do
   case $opt in
