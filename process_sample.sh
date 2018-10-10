@@ -116,7 +116,7 @@ VCF="$OUTD/results/variants/somaticSV.vcf.gz"
 # We place output file in the same directory as manta output
 OVCF="$OUTD/results/variants/$OUTVCF"
 
-python filter_vcf.py $VCF $OVCF
+python /usr/local/somatic_sv_workflow/filter_vcf.py $VCF $OVCF
 
 
 rc=$? # catch errors
