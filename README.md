@@ -1,4 +1,5 @@
 ## Somatic SV Workflow
+With modifications for CWL integration
 
 ### SV Caller
 - Manta 1.3.2
