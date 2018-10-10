@@ -1,6 +1,9 @@
 # this specific test reference - it is large uncompressed but in .tar.bz is very small
 Homo_sapiens_assembly19.COST16011_region.fa
 
+# vim swap files
+.*.swp
+
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
