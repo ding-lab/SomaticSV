@@ -68,6 +68,14 @@ TUMOR=$1
 NORMAL=$2
 REF=$3
 
+# uncompress REF if necessary.  This would typically be used just for test data
+if [[ ! -e $REF && -e "$REF.tar.bz2" ]]; then
+    echo Uncompressing "$REF.tar.bz2"
+    D=$(dirname $REF)
+    tar -xvjf "$REF.tar.bz2" -C $D
+fi
+
+
 if [ ! -e $TUMOR ]; then
     >&2 echo Error: tumor does not exist: $TUMOR
     exit 1
