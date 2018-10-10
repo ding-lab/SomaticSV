@@ -22,7 +22,7 @@ fi
 
 
 # http://wiki.bash-hackers.org/howto/getopts_tutorial
-while getopts ":vo:c:f:t" opt; do
+while getopts ":vo:c:f:T" opt; do
   case $opt in
     v)  # binary argument
       VERBOSE=1
@@ -43,6 +43,7 @@ while getopts ":vo:c:f:t" opt; do
     T)  # binary argument
         # These args are just for testing.  Obtained from failed run of 
         #	python /opt/conda/share/manta-1.4.0-1/bin/runMantaWorkflowDemo.py
+	# Test run succeeds without these args, but takes longer to run
       TESTARGS=" --region=8:107652000-107655000 --region=11:94974000-94989000 --candidateBins=4 --exome "
       >&2 echo "TESTARGS set for COST16011 test dataset"
       ;;
