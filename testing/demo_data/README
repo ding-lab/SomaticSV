@@ -1,3 +1,4 @@
-Test data from Strelka distribution
+Test data from manta distribution: https://github.com/Illumina/manta/tree/master/src/demo/data
 
-Details here: https://github.com/ding-lab/somaticwrapper/tree/cwl-dev/image.setup/S_StrelkaDemoSetup
+Please uncompress reference with,
+	tar -xvfj Homo_sapiens_assembly19.COST16011_region.fa.tar.bz2

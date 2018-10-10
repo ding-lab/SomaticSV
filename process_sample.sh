@@ -68,11 +68,14 @@ if [ ! -e $REF ]; then
 fi
 
 # First configure manta
-configManta.py --tumorBam $TUMOR --normalBam $NORMAL --referenceFasta $REF --runDir $OUTD 
-rc=\$? # catch errors
-if [[ \$rc != 0 ]]; then
-    >&2 echo Fatal error \$rc: \$!.  Exiting.
-    exit \$rc;
+# These args are just for testing.  Obtained from failed run of 
+#	python /opt/conda/share/manta-1.4.0-1/bin/runMantaWorkflowDemo.py
+ARGS=" --region=8:107652000-107655000 --region=11:94974000-94989000 --candidateBins=4 --exome "
+configManta.py --tumorBam $TUMOR --normalBam $NORMAL --referenceFasta $REF --runDir $OUTD $ARGS
+rc=$? # catch errors
+if [[ $rc != 0 ]]; then
+    >&2 echo Fatal error $rc: $!.  Exiting.
+    exit $rc;
 else
     >&2 echo configManta.py success.
 fi
@@ -80,10 +83,10 @@ fi
 
 # now run manta
 $OUTD/runWorkflow.py -m local -j $CPU
-rc=\$? # catch errors
-if [[ \$rc != 0 ]]; then
-    >&2 echo Fatal error \$rc: \$!.  Exiting.
-    exit \$rc;
+rc=$? # catch errors
+if [[ $rc != 0 ]]; then
+    >&2 echo Fatal error $rc: $!.  Exiting.
+    exit $rc;
 else
     >&2 echo runWorkflow.py success.
 fi
@@ -93,15 +96,16 @@ VCF="$OUTD/results/variants/somaticSV.vcf.gz"
 # We place output file in the same directory as manta output
 OVCF="$OUTD/results/variants/$OUTVCF"
 
-python filter_vcf.py $VCF $OUTVCF
+python filter_vcf.py $VCF $OVCF
 
 
-rc=\$? # catch errors
-if [[ \$rc != 0 ]]; then
-    >&2 echo Fatal error \$rc: \$!.  Exiting.
-    exit \$rc;
+rc=$? # catch errors
+if [[ $rc != 0 ]]; then
+    >&2 echo Fatal error $rc: $!.  Exiting.
+    exit $rc;
 else
     >&2 echo filter_vcf.py success.
 fi
 
+>&2 echo Written to $OVCF
 >&2 echo process_sample.sh success.

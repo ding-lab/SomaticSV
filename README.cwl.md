@@ -23,3 +23,16 @@ Examining code, 3 step process:
      * columns are case, tumor BAM, normal BAM paths
      * 47 rows
      * Split into two runs, run_1.txt and run_2.txt
+
+# Development notes
+```
+Configuration cmd: "/opt/conda/share/manta-1.4.0-1/bin/configManta.py" 
+--normalBam="/opt/conda/share/manta-1.4.0-1/share/demo/manta/data/HCC1954.NORMAL.30x.compare.COST16011_region.bam" 
+--tumorBam="/opt/conda/share/manta-1.4.0-1/share/demo/manta/data/G15512.HCC1954.1.COST16011_region.bam" 
+--referenceFasta="/opt/conda/share/manta-1.4.0-1/share/demo/manta/data/Homo_sapiens_assembly19.COST16011_region.fa" 
+--region=8:107652000-107655000 
+--region=11:94974000-94989000 
+--candidateBins=4 
+--exome 
+--runDir="MantaDemoAnalysis"
+```
