@@ -7,6 +7,7 @@
 # -o out_dir : Output directory [ ./output ]
 # -c cpu : CPU count [ 4 ]
 # -F output.vcf : specify output filename in manta results dir [ final.SV.WGS.vcf ]
+# -T : use test args, specific to "COST16011" data in testing/demo_data
 
 # Set defaults
 OUTD="./output"
@@ -14,7 +15,7 @@ OUTVCF="final.SV.WGS.vcf"
 CPU="4"
 
 # http://wiki.bash-hackers.org/howto/getopts_tutorial
-while getopts ":vo:c:f:" opt; do
+while getopts ":vo:c:f:t" opt; do
   case $opt in
     v)  # binary argument
       VERBOSE=1
@@ -31,6 +32,12 @@ while getopts ":vo:c:f:" opt; do
     f) # value argument
       OUTVCF=$OPTARG
       >&2 echo "Output VCF filename: $OUTVCF "
+      ;;
+    T)  # binary argument
+        # These args are just for testing.  Obtained from failed run of 
+        #	python /opt/conda/share/manta-1.4.0-1/bin/runMantaWorkflowDemo.py
+      TESTARGS=" --region=8:107652000-107655000 --region=11:94974000-94989000 --candidateBins=4 --exome "
+      >&2 echo "TESTARGS set for COST16011 test dataset"
       ;;
     \?)
       >&2 echo "Invalid option: -$OPTARG"
@@ -68,10 +75,7 @@ if [ ! -e $REF ]; then
 fi
 
 # First configure manta
-# These args are just for testing.  Obtained from failed run of 
-#	python /opt/conda/share/manta-1.4.0-1/bin/runMantaWorkflowDemo.py
-ARGS=" --region=8:107652000-107655000 --region=11:94974000-94989000 --candidateBins=4 --exome "
-configManta.py --tumorBam $TUMOR --normalBam $NORMAL --referenceFasta $REF --runDir $OUTD $ARGS
+configManta.py --tumorBam $TUMOR --normalBam $NORMAL --referenceFasta $REF --runDir $OUTD $TESTARGS
 rc=$? # catch errors
 if [[ $rc != 0 ]]; then
     >&2 echo Fatal error $rc: $!.  Exiting.

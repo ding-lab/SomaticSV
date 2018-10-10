@@ -14,13 +14,13 @@ MAINTAINER Wen-Wei Liao <wen-wei.liao@wustl.edu>
 MAINTAINER Matthew Wyczalkowski <m.wyczalkowski@wustl.edu>
 
 USER root
-RUN conda install -y manta cyvcf2 \
-    && source /opt/conda/bin/activate base
+RUN conda install -y manta cyvcf2 
 RUN apt-get update && apt-get install -y vim
 
-ENV dummy 1     # Increment this to force `git clone`
+ENV dummy 2     # Increment this to force `git clone`
 RUN cd /usr/local \
     && git clone https://github.com/mwyczalkowski/somatic_sv_workflow.git
 
 COPY vimrc /root/.vimrc
 WORKDIR /usr/local/somatic_sv_workflow
+RUN /bin/bash -c "source activate base"

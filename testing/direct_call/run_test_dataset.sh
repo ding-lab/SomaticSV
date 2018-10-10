@@ -9,5 +9,10 @@ OUTD="/usr/local/somatic_sv_workflow/testing/output.tmp"
 # 	tar -xvfj Homo_sapiens_assembly19.COST16011_region.fa.tar.bz2
 # before running demo
 
+# -T is special testing mode with the following parameters defined:
+#   --region=8:107652000-107655000 --region=11:94974000-94989000 --candidateBins=4 --exome "
+# These were obtained from :
+#	python /opt/conda/share/manta-1.4.0-1/bin/runMantaWorkflowDemo.py
+ARGS="-T"
 
-bash process_sample.sh -o $OUTD $TUMOR $NORMAL $REF
+bash process_sample.sh $ARGS -o $OUTD $TUMOR $NORMAL $REF
