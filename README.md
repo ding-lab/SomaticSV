@@ -1,5 +1,7 @@
 ## Somatic SV Workflow
 
+This branch contains CWL development work.
+
 ### SV Caller
 - Manta 1.3.2
 
