@@ -25,6 +25,8 @@ Examining code, 3 step process:
      * Split into two runs, run_1.txt and run_2.txt
 
 # Development notes
+
+Running test script (???) results in the following command
 ```
 Configuration cmd: "/opt/conda/share/manta-1.4.0-1/bin/configManta.py" 
 --normalBam="/opt/conda/share/manta-1.4.0-1/share/demo/manta/data/HCC1954.NORMAL.30x.compare.COST16011_region.bam" 
@@ -36,3 +38,4 @@ Configuration cmd: "/opt/conda/share/manta-1.4.0-1/bin/configManta.py"
 --exome 
 --runDir="MantaDemoAnalysis"
 ```
+It fails, but we use these parameters for testing (e.g., with -T flag in `process_sample.sh`)

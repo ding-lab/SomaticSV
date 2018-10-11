@@ -1,3 +1,5 @@
+# YAML input file for test data distributed with this project
+# All paths seem relative to this file
 tumor:
   class: File
   path: ../demo_data/G15512.HCC1954.1.COST16011_region.bam
