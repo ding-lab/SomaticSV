@@ -17,7 +17,7 @@ while getopts ":dc:" opt; do
       >&2 echo "Dry run"
       DRYRUN=1
       ;;
-    f) # example of value argument
+    c) # example of value argument
       CONFIG=$OPTARG
       >&2 echo "Cromwell config file: $CONFIG"
       ;;
