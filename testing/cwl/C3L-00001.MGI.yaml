@@ -1,0 +1,12 @@
+# Testing with LUAD b4 case C3L-00001
+#  BAM paths from https://github.com/ding-lab/CPTAC3.catalog
+tumor:
+  class: File
+  path: /gscmnt/gc2619/dinglab_cptac3/GDC_import/data/800c4053-2b67-4e66-bb97-474458635c21/CPT0001580165.WholeGenome.RP-1303.bam
+normal:
+  class: File
+  path: /gscmnt/gc2619/dinglab_cptac3/GDC_import/data/caa607a4-b0c5-4b5d-ba51-1e648a8e264a/CPT0000150163.WholeGenome.RP-1303.bam
+reference:
+  class: File
+  path: /gscmnt/gc2521/dinglab/mwyczalk/somatic-wrapper-data/image.data/A_Reference/Homo_sapiens_assembly19.fasta
+
