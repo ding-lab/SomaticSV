@@ -1,0 +1,190 @@
+#!/bin/bash
+
+# Matthew Wyczalkowski <m.wyczalkowski@wustl.edu>
+# https://dinglab.wustl.edu/
+
+read -r -d '' USAGE <<'EOF'
+Usage: make_yaml.sh [options] CASE [ CASE2 ... ]
+  Create YAML files for SomaticSV runs
+
+Options:
+-h: print usage information
+-b BAMMAP: path to BamMap data file.  Required, must exist
+    Format defined here: https://github.com/ding-lab/importGDC/blob/master/make_bam_map.sh
+-r REF: path to reference file.  Required, must exist
+-o OUTD: output directory of YAML files.  If "-", write YAML to stdout.  Default: .
+-1 : Quit after evaluating one case
+
+If CASE is - then read CASEs from STDIN
+
+Output YAML file filename is CASE.yaml.  It defines tumor WGS BAM, normal WGS BAM, and reference file which is required to run SomaticSV CWL 
+BAM paths obtained from BAMMAP 
+Assuming all references are hg38 (this is used for searching BAMMAP)
+
+EOF
+
+SCRIPT=$(basename $0)
+
+OUTD="."
+while getopts ":hb:r:d:1" opt; do
+  case $opt in
+    h)  # Required
+      echo "$USAGE"
+      exit 0
+      ;;
+    b)  # Required
+      BAMMAP="$OPTARG"
+      ;;
+    r)  # Required
+      REF="$OPTARG"
+      ;;
+    d)  
+      OUTD="$OPTARG"
+      ;;
+    1)  
+      QUIT_AFTER_ONE=1
+      ;;
+    \?)
+      >&2 echo "Invalid option: -$OPTARG" 
+      >&2 echo "$USAGE"
+      exit 1
+      ;;
+    :)
+      >&2 echo "Option -$OPTARG requires an argument." 
+      >&2 echo "$USAGE"
+      exit 1
+      ;;
+  esac
+done
+shift $((OPTIND-1))
+
+if [ -z $BAMMAP ]; then
+    >&2 echo ERROR: BamMap file not defined \(-b\)
+    exit 1
+fi
+if [ ! -e $BAMMAP ]; then
+    >&2 echo "ERROR: $BAMMAP does not exist"
+    exit 1
+fi
+if [ -z $REF ]; then
+    >&2 echo ERROR: Reference not defined \(-r\)
+    exit 1
+fi
+if [ ! -e $REF ]; then
+    >&2 echo "ERROR: $BAMMAP does not exist"
+    exit 1
+fi
+
+if [ "$#" -lt 1 ]; then
+    >&2 echo ERROR: Wrong number of arguments
+    >&2 echo Usage: make_docker_map.sh \[options\] CASE \[CASE2 ...\]
+    exit 1
+fi
+
+# this allows us to get CASEs in one of two ways:
+# 1: start_step.sh ... CASE1 CASE2 CASE3
+# 2: cat CASES.dat | start_step.sh ... -
+if [ $1 == "-" ]; then
+    CASES=$(cat - )
+else
+    CASES="$@"
+fi
+
+function test_exit_status {
+    # Evaluate return value for chain of pipes; see https://stackoverflow.com/questions/90418/exit-shell-script-based-on-process-exit-code
+    rcs=${PIPESTATUS[*]};
+    for rc in ${rcs}; do
+        if [[ $rc != 0 ]]; then
+            >&2 echo $SCRIPT: Fatal ERROR.  Exiting.
+            exit $rc;
+        fi;
+    done
+}
+
+# searches for entries with
+# ref = hg38
+# experimental strategy = WGS
+# sample type = as given
+# case = as given
+function get_BAM {
+    CASE=$1
+    ST=$2
+    REF="hg38"
+    ES="WGS"
+    # BAMMAP as global
+
+    # BamMap columns
+    #     1  sample_name
+    #     2  case
+    #     3  disease
+    #     4  experimental_strategy
+    #     5  sample_type
+    #     6  data_path
+    #     7  filesize
+    #     8  data_format
+    #     9  reference
+    #    10  UUID
+    #    11  system
+
+    LINE_A=$(awk -v c=$CASE -v ref=$REF -v es=$ES -v st=$ST 'BEGIN{FS="\t";OFS="\t"}{if ($2 == c && $4 == es && $5 == st && $9 == ref) print}' $BAMMAP)
+
+    if [ -z "$LINE_A" ]; then
+        >&2 echo ERROR: $REF $CASE $ES $ST sample not found in $BAMMAP
+        exit 1
+    elif [ $(echo "$LINE_A" | wc -l) != "1" ]; then
+        >&2 echo ERROR: $REF $CASE $ES $ST sample has multiple matches in $BAMMAP
+        >&2 echo Not making assumptions about which to choose, YAML will need to be created manually
+        #LINE_A=$(echo "$LINE_A" | head -n 1)
+        exit 1
+    fi
+
+    # Sample Name and UUID will be needed for analysis summary
+    SN=$(echo "$LINE_A" | cut -f 1)
+    BAM=$(echo "$LINE_A" | cut -f 6)
+    UUID=$(echo "$LINE_A" | cut -f 10)
+
+    echo $BAM
+}
+
+function get_YAML {
+    TUMOR=$1
+    NORMAL=$2
+    REF=$3
+
+    cat <<EOF
+tumor:
+  class: File
+  path: $TUMOR
+normal:
+  class: File
+  path: $NORMAL
+reference:
+  class: File
+  path: $REF
+EOF
+
+}
+
+
+for CASE in $CASES
+do
+
+    TUMOR=$(get_BAM $CASE "tumor")
+    NORMAL=$(get_BAM $CASE "normal")
+
+    YAML=$(get_YAML $TUMOR $NORMAL $REF)
+    if [ $OUTD == "-" ]; then
+        echo "$YAML"
+    else
+        YAML_FN="$OUTD/$CASE.yaml"
+        echo "$YAML" > $YAML_FN
+        >&2 echo Written to $YAML
+    fi
+
+
+    if [ $QUIT_AFTER_ONE ]; then
+        >&2 echo Quitting after one
+        exit 0
+    fi
+done
+
