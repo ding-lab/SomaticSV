@@ -26,7 +26,7 @@ EOF
 SCRIPT=$(basename $0)
 
 OUTD="."
-while getopts ":hb:r:d:1" opt; do
+while getopts ":hb:r:o:1" opt; do
   case $opt in
     h)  # Required
       echo "$USAGE"
@@ -38,7 +38,7 @@ while getopts ":hb:r:d:1" opt; do
     r)  # Required
       REF="$OPTARG"
       ;;
-    d)  
+    o)  
       OUTD="$OPTARG"
       ;;
     1)  
@@ -71,7 +71,7 @@ if [ -z $REF ]; then
     exit 1
 fi
 if [ ! -e $REF ]; then
-    >&2 echo "ERROR: $BAMMAP does not exist"
+    >&2 echo "ERROR: $REF does not exist"
     exit 1
 fi
 
@@ -170,7 +170,9 @@ for CASE in $CASES
 do
 
     TUMOR=$(get_BAM $CASE "tumor")
-    NORMAL=$(get_BAM $CASE "normal")
+    test_exit_status
+    NORMAL=$(get_BAM $CASE "blood_normal")
+    test_exit_status
 
     YAML=$(get_YAML $TUMOR $NORMAL $REF)
     if [ $OUTD == "-" ]; then
@@ -178,7 +180,7 @@ do
     else
         YAML_FN="$OUTD/$CASE.yaml"
         echo "$YAML" > $YAML_FN
-        >&2 echo Written to $YAML
+        >&2 echo Written to $YAML_FN
     fi
 
 
