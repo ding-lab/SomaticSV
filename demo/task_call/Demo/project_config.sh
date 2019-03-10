@@ -14,4 +14,6 @@ BAMMAP="/Users/mwyczalk/Projects/SomaticSV/somatic_sv_workflow/demo/task_call/De
 REF="/Users/mwyczalk/Projects/SomaticSV/somatic_sv_workflow/demo/demo_data/Homo_sapiens_assembly19.COST16011_region.fa"
 
 YAMLD="./yaml"
+RABIXD="/Users/mwyczalk/Data/SomaticSV"
+CWL="$SSV_ROOT/cwl/SomaticSV.cwl"
 

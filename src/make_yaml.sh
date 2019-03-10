@@ -12,7 +12,7 @@ Options:
 -b BAMMAP: path to BamMap data file.  Required, must exist
     Format defined here: https://github.com/ding-lab/importGDC/blob/master/make_bam_map.sh
 -r REF: path to reference file.  Required, must exist
--o OUTD: output directory of YAML files.  If "-", write YAML to stdout.  Default: .
+-y YAMLD: output directory of YAML files.  If "-", write YAML to stdout.  Default: .
 -1 : Quit after evaluating one case
 
 If CASE is - then read CASEs from STDIN
@@ -25,8 +25,8 @@ EOF
 
 SCRIPT=$(basename $0)
 
-OUTD="."
-while getopts ":hb:r:o:1" opt; do
+YAMLD="."
+while getopts ":hb:r:y:1" opt; do
   case $opt in
     h)  # Required
       echo "$USAGE"
@@ -38,8 +38,8 @@ while getopts ":hb:r:o:1" opt; do
     r)  # Required
       REF="$OPTARG"
       ;;
-    o)  
-      OUTD="$OPTARG"
+    y)  
+      YAMLD="$OPTARG"
       ;;
     1)  
       QUIT_AFTER_ONE=1
@@ -175,10 +175,10 @@ do
     test_exit_status
 
     YAML=$(get_YAML $TUMOR $NORMAL $REF)
-    if [ $OUTD == "-" ]; then
+    if [ $YAMLD == "-" ]; then
         echo "$YAML"
     else
-        YAML_FN="$OUTD/$CASE.yaml"
+        YAML_FN="$YAMLD/$CASE.yaml"
         echo "$YAML" > $YAML_FN
         >&2 echo Written to $YAML_FN
     fi
