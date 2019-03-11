@@ -17,3 +17,6 @@ YAMLD="./yaml"
 RABIXD="/Users/mwyczalk/Data/SomaticSV"
 CWL="$SSV_ROOT/cwl/SomaticSV.cwl"
 
+PRE_SUMMARY="dat/analysis_pre-summary.dat"
+SUMMARY="dat/analysis_summary.dat"
+

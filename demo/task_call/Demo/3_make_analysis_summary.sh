@@ -2,7 +2,7 @@
 
 source project_config.sh
 
-bash $SSV_ROOT/src/run_rabix_tasks.sh $@ -y $YAMLD -r $RABIXD -c $CWL - < $CASES
+bash $SSV_ROOT/src/make_analysis_summary.sh $@ -p $PRE_SUMMARY - < $CASES
 
 rc=$?
 if [[ $rc != 0 ]]; then

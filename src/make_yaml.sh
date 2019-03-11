@@ -13,6 +13,7 @@ Options:
     Format defined here: https://github.com/ding-lab/importGDC/blob/master/make_bam_map.sh
 -r REF: path to reference file.  Required, must exist
 -y YAMLD: output directory of YAML files.  If "-", write YAML to stdout.  Default: .
+-p PRE_SUMMARY: analysis pre-summary filename
 -1 : Quit after evaluating one case
 
 If CASE is - then read CASEs from STDIN
@@ -20,13 +21,16 @@ If CASE is - then read CASEs from STDIN
 Output YAML file filename is CASE.yaml.  It defines tumor WGS BAM, normal WGS BAM, and reference file which is required to run SomaticSV CWL 
 BAM paths obtained from BAMMAP 
 Assuming all references are hg38 (this is used for searching BAMMAP)
+Analysis pre-summary is an optional output file which contains the UUID and sample names of input data; this information will be
+  combined with run results at the conclusion of analysis to generate analysis summary file.  Columns: case, tumor name, tumor uuid, normal name, normal uuid
+    
 
 EOF
 
 SCRIPT=$(basename $0)
 
 YAMLD="."
-while getopts ":hb:r:y:1" opt; do
+while getopts ":hb:r:y:1p:" opt; do
   case $opt in
     h)  # Required
       echo "$USAGE"
@@ -42,7 +46,11 @@ while getopts ":hb:r:y:1" opt; do
       YAMLD="$OPTARG"
       ;;
     1)  
-      QUIT_AFTER_ONE=1
+      JUSTONE=1
+      ;;
+    p)  
+      PRE_SUMMARY="$OPTARG"
+      >&2 echo "Writing analysis pre-summary file to $PRE_SUMMARY"
       ;;
     \?)
       >&2 echo "Invalid option: -$OPTARG" 
@@ -143,7 +151,7 @@ function get_BAM {
     BAM=$(echo "$LINE_A" | cut -f 6)
     UUID=$(echo "$LINE_A" | cut -f 10)
 
-    echo $BAM
+    printf "$BAM\t$SN\t$UUID"
 }
 
 function get_YAML {
@@ -165,14 +173,30 @@ EOF
 
 }
 
+# Write analysis pre-summary header 
+if [ ! -z $PRE_SUMMARY ]; then
+    PSD=$(dirname $PRE_SUMMARY)
+    if [ ! -d $PSD ]; then
+        >&2 echo Making output directory for analysis pre-summary: $PSD
+        mkdir -p $PSD
+        test_exit_status
+    fi
+
+    printf "# case\ttumor_name\ttumor_uuid\tnormal_name\tnormal_uuid\n" > $PRE_SUMMARY
+    test_exit_status
+fi
+
 
 for CASE in $CASES
 do
 
     TUMOR=$(get_BAM $CASE "tumor")
     test_exit_status
+    TUMOR_BAM=$(echo "$TUMOR" | cut -f 1)
+
     NORMAL=$(get_BAM $CASE "blood_normal")
     test_exit_status
+    NORMAL_BAM=$(echo "$NORMAL" | cut -f 1)
 
     YAML=$(get_YAML $TUMOR $NORMAL $REF)
     if [ $YAMLD == "-" ]; then
@@ -183,8 +207,15 @@ do
         >&2 echo Written to $YAML_FN
     fi
 
+    if [ ! -z $PRE_SUMMARY ]; then
+        TUMOR_SN=$(echo "$TUMOR" | cut -f 2)
+        TUMOR_UUID=$(echo "$TUMOR" | cut -f 3)
+        NORMAL_SN=$(echo "$NORMAL" | cut -f 2)
+        NORMAL_UUID=$(echo "$NORMAL" | cut -f 3)
+        printf "$CASE\t$TUMOR_SN\t$TUMOR_UUID\t$NORMAL_SN\t$NORMAL_UUID\n" >> $PRE_SUMMARY
+    fi
 
-    if [ $QUIT_AFTER_ONE ]; then
+    if [ $JUSTONE ]; then
         >&2 echo Quitting after one
         exit 0
     fi

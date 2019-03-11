@@ -12,7 +12,7 @@ Usage:
 
 Required options:
 -c CWL: CWL file which defines workflow
--o RABIXD: RABIX output base directory
+-r RABIXD: RABIX output base directory
 
 Optional options
 -y YAMLD: directory with YAML input files (named CASE.yaml).  Default "."
@@ -39,7 +39,7 @@ NJOBS=0
 YAMLD="."
 LOGD="./logs"
 
-while getopts ":y:c:o:hd1J:l:" opt; do
+while getopts ":y:c:r:hd1J:l:" opt; do
   case $opt in
     h) 
       echo "$USAGE"
@@ -60,7 +60,7 @@ while getopts ":y:c:o:hd1J:l:" opt; do
     c) 
       CWL=$OPTARG
       ;;
-    o) 
+    r) 
       RABIXD="$OPTARG"
       ;;
     J) 
