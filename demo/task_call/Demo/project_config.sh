@@ -7,7 +7,7 @@
 
 SSV_ROOT="/Users/mwyczalk/Projects/SomaticSV/somatic_sv_workflow"
 
-CASES="cases.dat"
+CASES="dat/cases.dat"
 BAMMAP="/Users/mwyczalk/Projects/SomaticSV/somatic_sv_workflow/demo/task_call/Demo/Demo.BamMap.dat"
 
 # This path below is for Demo reference

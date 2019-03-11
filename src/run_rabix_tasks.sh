@@ -21,6 +21,7 @@ Optional options
 -d: dry run: print commands but do not run
 -1 : stop after one case processed.
 -J N: run N tasks in parallel.  If 0, disable parallel mode. Default 0
+-e: write STDERR output of Rabix to terminal rather than LOGD/CASE.err
 
 RABIXD contains data generated during CWL execution
 STDERR and STDOUT of rabix, as well as tmp dir and log of parallel, written to LOGD
@@ -39,7 +40,7 @@ NJOBS=0
 YAMLD="."
 LOGD="./logs"
 
-while getopts ":y:c:r:hd1J:l:" opt; do
+while getopts ":y:c:r:hd1J:l:e" opt; do
   case $opt in
     h) 
       echo "$USAGE"
@@ -65,6 +66,9 @@ while getopts ":y:c:r:hd1J:l:" opt; do
       ;;
     J) 
       NJOBS="$OPTARG"
+      ;;
+    e) 
+      STDERR_OUT=1
       ;;
     \?)
       >&2 echo "Invalid option: -$OPTARG" 
@@ -117,13 +121,18 @@ function get_rabix_cmd {
     CWL="$1"
     CASE="$2"
     RABIXD="$3"
-    STDOUT="$4"
-    STDERR="$5"
+    STDOUT_FN="$4"
+    STDERR_FN="$5"
 
     YAML="$YAMLD/$CASE.yaml"  
     confirm "$YAML"  # this must exist
     
-    CMD="rabix --basedir $RABIXD $CWL $YAML > $STDOUT 2> $STDERR"
+    # if -e is not set, write STDERR to file, otherwise no redirect (i.e., send to terminal)
+    if [ -z "$STDERR_OUT" ]; then
+        STDERR_REDIRECT="2> $STDERR_FN"
+    fi
+    
+    CMD="rabix --basedir $RABIXD $CWL $YAML > $STDOUT_FN $STDERR_REDIRECT"
 
     echo "$CMD"
 }
@@ -172,10 +181,10 @@ fi
 for CASE in $CASES; do
     >&2 echo Processing case $CASE
 
-    STDOUT="$LOGD/$CASE.out"
-    STDERR="$LOGD/$CASE.err"
+    STDOUT_FN="$LOGD/$CASE.out"
+    STDERR_FN="$LOGD/$CASE.err"
 
-    CMD=$(get_rabix_cmd $CWL $CASE $RABIXD $STDOUT $STDERR)
+    CMD=$(get_rabix_cmd $CWL $CASE $RABIXD $STDOUT_FN $STDERR_FN)
     test_exit_status
 
     if [ $NJOBS != 0 ]; then
@@ -185,6 +194,7 @@ for CASE in $CASES; do
     fi
 
     run_cmd "$CMD"
+    >&2 echo Written to $STDOUT_FN
 
     if [ $JUSTONE ]; then
         break

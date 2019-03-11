@@ -2,7 +2,7 @@
 
 source project_config.sh
 
-bash $SSV_ROOT/src/make_analysis_summary.sh $@ -p $PRE_SUMMARY - < $CASES
+bash $SSV_ROOT/src/make_analysis_summary.sh $@ -p $PRE_SUMMARY -s $SUMMARY - < $CASES
 
 rc=$?
 if [[ $rc != 0 ]]; then

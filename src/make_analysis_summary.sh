@@ -5,18 +5,17 @@
 
 read -r -d '' USAGE <<'EOF'
 Usage: make_analysis.sh [options] CASE [ CASE2 ... ]
-  Create analysis summary file reporting results from all runs
+  Create analysis summary file reporting results for all cases
 
 Required arguments:
 -p: analysis pre-summary file.  Required, must exist
 
 Options:
 -h: print usage information
--s SUMMARY: output analysis results filefile.  If not defined, written to STDOUT
+-s SUMMARY: output analysis results file.  If not defined, written to STDOUT
 -1: Quit after evaluating one case
 -l LOGD: directory where runtime output written.  Default "./logs"
 -w: Issue warning instead of error if output file does not exist
-**TODO** implement this
 
 If CASE is - then read CASEs from STDIN
 Processes rabix run output in LOGD/CASE.out to obtain path to SomaticSV output data
@@ -30,7 +29,7 @@ EOF
 SCRIPT=$(basename $0)
 
 LOGD="./logs"
-while getopts ":hs:p:1l:" opt; do
+while getopts ":hs:p:1l:w" opt; do
   case $opt in
     h)  # Required
       echo "$USAGE"
@@ -47,6 +46,9 @@ while getopts ":hs:p:1l:" opt; do
       ;;
     l) 
       LOGD="$OPTARG"
+      ;;
+    w) 
+      ONLYWARN=1
       ;;
     \?)
       >&2 echo "Invalid option: -$OPTARG" 
@@ -79,9 +81,14 @@ fi
 
 function confirm {
     FN=$1
+    WARN=$2
     if [ ! -s $FN ]; then
-        >&2 echo ERROR: $FN does not exist or is empty
-        exit 1
+        if [ -z $WARN ]; then
+            >&2 echo ERROR: $FN does not exist or is empty
+            exit 1
+        else
+            >&2 echo WARNING: $FN does not exist or is empty.  Continuing
+        fi
     fi
 }
 
@@ -149,7 +156,7 @@ do
     # extract result path from YAML-format result file using `jq` utility, and confirm that it exists
     OUTPUT_PATH=$(cat $RES_DATA | jq -r '.output.path')
     test_exit_status
-    confirm $OUTPUT_PATH
+    confirm $OUTPUT_PATH $ONLYWARN
     
     PS_DATA_TAIL=$(echo "$PS_DATA" | cut -f 2-5) # 
     DATA=$(printf "$CASE\t$OUTPUT_PATH\t$PS_DATA_TAIL\n")
@@ -169,4 +176,4 @@ done
 if [ ! -z $SUMMARY ]; then
     >&2 echo Analysis summary written to $SUMMARY
 fi
->&2 echo 
+

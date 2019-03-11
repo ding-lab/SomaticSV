@@ -110,10 +110,11 @@ function test_exit_status {
 }
 
 # searches for entries with
-# ref = hg38
-# experimental strategy = WGS
-# sample type = as given
-# case = as given
+#   ref = hg38
+#   experimental strategy = WGS
+#   sample type = as given
+#   case = as given
+# Returns BAM, sample name, UUID 
 function get_BAM {
     CASE=$1
     ST=$2
@@ -198,7 +199,7 @@ do
     test_exit_status
     NORMAL_BAM=$(echo "$NORMAL" | cut -f 1)
 
-    YAML=$(get_YAML $TUMOR $NORMAL $REF)
+    YAML=$(get_YAML $TUMOR_BAM $NORMAL_BAM $REF)
     if [ $YAMLD == "-" ]; then
         echo "$YAML"
     else
