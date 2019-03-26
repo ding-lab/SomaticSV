@@ -6,7 +6,7 @@
 # -v : verbose output
 # -o out_dir : Output directory [ ./output ]
 # -c cpu : CPU count [ 4 ]
-# -F output.vcf : specify output filename in manta results dir [ final.SV.WGS.vcf ]
+# -f output.vcf : specify output filename in manta results dir [ final.SV.WGS.vcf ]
 # -T : use test args, specific to "COST16011" data in testing/demo_data
 
 # Set defaults
