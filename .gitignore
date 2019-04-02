@@ -2,8 +2,10 @@
 Homo_sapiens_assembly19.COST16011_region.fa
 
 yaml
+yaml.*
 logs
 dat
+dat.*
 
 # vim swap files
 .*.swp

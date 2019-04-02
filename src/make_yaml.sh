@@ -151,8 +151,9 @@ function get_BAM {
     SN=$(echo "$LINE_A" | cut -f 1)
     BAM=$(echo "$LINE_A" | cut -f 6)
     UUID=$(echo "$LINE_A" | cut -f 10)
+    DIS=$(echo "$LINE_A" | cut -f 3)
 
-    printf "$BAM\t$SN\t$UUID"
+    printf "$BAM\t$SN\t$UUID\t$DIS"
 }
 
 function get_YAML {
@@ -183,7 +184,7 @@ if [ ! -z $PRE_SUMMARY ]; then
         test_exit_status
     fi
 
-    printf "# case\ttumor_name\ttumor_uuid\tnormal_name\tnormal_uuid\n" > $PRE_SUMMARY
+    printf "# case\tdisease\ttumor_name\ttumor_uuid\tnormal_name\tnormal_uuid\n" > $PRE_SUMMARY
     test_exit_status
 fi
 
@@ -194,6 +195,7 @@ do
     TUMOR=$(get_BAM $CASE "tumor")
     test_exit_status
     TUMOR_BAM=$(echo "$TUMOR" | cut -f 1)
+    DIS=$(echo "$TUMOR" | cut -f 4)
 
     NORMAL=$(get_BAM $CASE "blood_normal")
     test_exit_status
@@ -213,7 +215,7 @@ do
         TUMOR_UUID=$(echo "$TUMOR" | cut -f 3)
         NORMAL_SN=$(echo "$NORMAL" | cut -f 2)
         NORMAL_UUID=$(echo "$NORMAL" | cut -f 3)
-        printf "$CASE\t$TUMOR_SN\t$TUMOR_UUID\t$NORMAL_SN\t$NORMAL_UUID\n" >> $PRE_SUMMARY
+        printf "$CASE\t$DIS\t$TUMOR_SN\t$TUMOR_UUID\t$NORMAL_SN\t$NORMAL_UUID\n" >> $PRE_SUMMARY
     fi
 
     if [ $JUSTONE ]; then

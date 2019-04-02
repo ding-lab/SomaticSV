@@ -129,7 +129,7 @@ fi
 confirm $PRE_SUMMARY
 
 # Write analysis summary header.  If SUMMARY not defined, write to STDOUT
-HEADER=$(printf "# case\tdata\ttumor_name\ttumor_uuid\tnormal_name\tnormal_uuid\n") 
+HEADER=$(printf "# case\tdisease\tdata\ttumor_name\ttumor_uuid\tnormal_name\tnormal_uuid\n") 
 if [ ! -z $SUMMARY ]; then
     SD=$(dirname $SUMMARY)
     if [ ! -d $SD ]; then
@@ -158,8 +158,9 @@ do
     test_exit_status
     confirm $OUTPUT_PATH $ONLYWARN
     
-    PS_DATA_TAIL=$(echo "$PS_DATA" | cut -f 2-5) # 
-    DATA=$(printf "$CASE\t$OUTPUT_PATH\t$PS_DATA_TAIL\n")
+    DIS=$(echo "$PS_DATA" | cut -f 2) # 
+    PS_DATA_TAIL=$(echo "$PS_DATA" | cut -f 3-6) # 
+    DATA=$(printf "$CASE\t$DIS\t$OUTPUT_PATH\t$PS_DATA_TAIL\n")
 
     if [ ! -z $SUMMARY ]; then
         echo "$DATA" >> $SUMMARY
