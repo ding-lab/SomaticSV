@@ -16,6 +16,7 @@ Options:
 -1: Quit after evaluating one case
 -l LOGD: directory where runtime output written.  Default "./logs"
 -w: Issue warning instead of error if output file does not exist
+-F FILE_FORMAT: file format of result data.  Default: VCF
 
 If CASE is - then read CASEs from STDIN
 Processes rabix run output in LOGD/CASE.out to obtain path to SomaticSV output data
@@ -29,7 +30,8 @@ EOF
 SCRIPT=$(basename $0)
 
 LOGD="./logs"
-while getopts ":hs:p:1l:w" opt; do
+FILE_FORMAT="VCF"
+while getopts ":hs:p:1l:wF:" opt; do
   case $opt in
     h)  # Required
       echo "$USAGE"
@@ -49,6 +51,9 @@ while getopts ":hs:p:1l:w" opt; do
       ;;
     w) 
       ONLYWARN=1
+      ;;
+    F) 
+      FILE_FORMAT="$OPTARG"
       ;;
     \?)
       >&2 echo "Invalid option: -$OPTARG" 
@@ -129,7 +134,7 @@ fi
 confirm $PRE_SUMMARY
 
 # Write analysis summary header.  If SUMMARY not defined, write to STDOUT
-HEADER=$(printf "# case\tdisease\tdata\ttumor_name\ttumor_uuid\tnormal_name\tnormal_uuid\n") 
+HEADER=$(printf "# case\tdisease\tdata\tfile_format\ttumor_name\ttumor_uuid\tnormal_name\tnormal_uuid\n") 
 if [ ! -z $SUMMARY ]; then
     SD=$(dirname $SUMMARY)
     if [ ! -d $SD ]; then
@@ -159,8 +164,8 @@ do
     confirm $OUTPUT_PATH $ONLYWARN
     
     DIS=$(echo "$PS_DATA" | cut -f 2) # 
-    PS_DATA_TAIL=$(echo "$PS_DATA" | cut -f 3-6) # 
-    DATA=$(printf "$CASE\t$DIS\t$OUTPUT_PATH\t$PS_DATA_TAIL\n")
+    PS_DATA_TAIL=$(echo "$PS_DATA" | cut -f 3-6) 
+    DATA=$(printf "$CASE\t$DIS\t$OUTPUT_PATH\t$FILE_FORMAT\t$PS_DATA_TAIL\n")
 
     if [ ! -z $SUMMARY ]; then
         echo "$DATA" >> $SUMMARY
