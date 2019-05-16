@@ -91,6 +91,15 @@ This step will write results to two places specified in `project_config.sh`: `LO
 When analysis completes, this step will create an analysis summary file which reports on the path to the output VCF file per case, and the 
 input files which were used to generate it.
 
+This creates analysis description file like,
+```
+# case  disease data    file_format tumor_name  tumor_uuid  normal_name normal_uuid
+C3L-00081   LSCC    /diskmnt/Projects/cptac_scratch/Rabix/SomaticSV-2019-03-11-122143.684/root/output/results/variants/final.SV.WGS.vcf VCF C3L-00081.WGS.T.hg38    cb4885fd-11cd-4eca-a876-35c74daf9feb    C3L-00081.WGS.N.hg38    4571e0d7-4c43-4ff8-aad2-f39bc4964cdf
+C3L-00104   GBM /diskmnt/Projects/cptac_scratch/Rabix/SomaticSV-2019-03-11-122143.817/root/output/results/variants/final.SV.WGS.vcf VCF C3L-00104.WGS.T.hg38    d1be16bb-3b12-40f2-ac23-99fabddc615a    C3L-00104.WGS.N.hg38    b671161a-35d8-41ec-af05-22e5d61df42a
+C3L-00365   GBM /diskmnt/Projects/cptac_scratch/Rabix/SomaticSV-2019-03-11-122143.962/root/output/results/variants/final.SV.WGS.vcf VCF C3L-00365.WGS.T.hg38    0976b529-4cf1-4ce0-9777-5700dc51cede    C3L-00365.WGS.N.hg38    4d6b2cf2-0e59-4d7e-8189-7ce030358a1e
+C3L-00415   LSCC    /diskmnt/Projects/cptac_scratch/Rabix/SomaticSV-2019-03-15-183753.761/root/output/results/variants/final.SV.WGS.vcf VCF C3L-00415.WGS.T.hg38    51a9bfe4-562f-44a7-b1c5-e5237c92b927    C3L-00415.WGS.N.hg38    1415f178-da4e-478d-9909-53e201c259e 
+```
+[Analysis description file details](https://docs.google.com/document/d/1Ho5cygpxd8sB_45nJ90d15DcdaGCiDqF0_jzIcc-9B4/edit)
 
 # Development notes
 ## Demo data
