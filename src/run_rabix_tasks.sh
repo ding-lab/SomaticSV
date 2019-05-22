@@ -199,6 +199,7 @@ for CASE in $CASES; do
     if [ $JUSTONE ]; then
         break
     fi
+    sleep 0.1  # since Rabix uses timestamp to make directories unique, need to wait a moment before going on to next one
 
 done
 
