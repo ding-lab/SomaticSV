@@ -1,0 +1,13 @@
+# Testing with CCRC b4 case C3L-00079
+#  BAM paths from https://github.com/ding-lab/CPTAC3.catalog
+#  Reference found in Yige's directory, ad hoc
+tumor:
+  class: File
+  path: /diskmnt/Projects/cptac/GDC_import/data/7a798aa2-c28a-4ae8-8e25-f17d7405dbd2/CPT0001260005.WholeGenome.RP-1303.bam
+normal:
+  class: File
+  path: /diskmnt/Projects/cptac/GDC_import/data/089f0221-be6c-4088-9ec9-945b2282cee9/CPT0000070163.WholeGenome.RP-1303.bam
+reference:
+  class: File
+  path: /diskmnt/Projects/CPTAC3CNV/gatk4wxscnv/inputs/Homo_sapiens_assembly19.fasta
+
