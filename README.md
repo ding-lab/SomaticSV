@@ -3,6 +3,7 @@ With modifications for CWL integration
 
 Contact Matt Wyczalkowski (m.wyczalkowski@wustl.edu) with questions
 
+
 ## SV Caller
 - Manta 1.4.0
 - Filters: Only select the variants which pass the following criteria:
