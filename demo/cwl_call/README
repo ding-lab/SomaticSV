@@ -1,0 +1,16 @@
+Testing CWL
+
+Two tests are implemented here:
+* Test dataset
+* case C3L-00079, for comparison against run on MGI:
+    /gscmnt/gc2741/ding/wliao/CPTAC3/CPTAC3.b4/results/C3L-00079.SV.WGS.vcf
+
+Switching between these testing schemes currently involves modifying the YAML file in ./run_rabix.sh
+
+Results of run for case C3L-00079 using CWL are currently:
+    denali:/home/mwyczalk_test/Projects/Rabix/somatic_sv_workflow/testing/cwl_call/results/somatic_sv_workflow-2018-10-10-102951.339/root/output/results/variants/final.SV.WGS.vcf
+
+Comparing run of C3L-00079 at MGI vs. that generated here, the principal difference is that we are using 
+using Manta 1.4.0 instead of 1.3.2 as was used at MGI.
+The differences are minor: some IDs are different, but same number of calls
+
