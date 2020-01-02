@@ -9,7 +9,7 @@
 # Output will be in ./results directory
 
 # Defaults
-CONFIG="dat/cromwell-config-db.dat"
+CONFIG="dat/cromwell-config.dat"
 # http://wiki.bash-hackers.org/howto/getopts_tutorial
 while getopts ":dc:" opt; do
   case $opt in
@@ -42,10 +42,11 @@ CWL="$SSW_ROOT/cwl/SomaticSV.cwl"
 # Cromwell 35 in image  registry.gsc.wustl.edu/apipe-builder/genome_perl_environment:5
 CROMWELL="/opt/cromwell.jar"
 
+# Notes about DB below.  We are not using DB for this run
 # from https://confluence.ris.wustl.edu/pages/viewpage.action?spaceKey=CI&title=Cromwell#Cromwell-ConnectingtotheDatabase
 # Connecting to the database section
 # Note also database section in config fil
-DB_ARGS="-Djavax.net.ssl.trustStorePassword=changeit -Djavax.net.ssl.trustStore=/gscmnt/gc2560/core/genome/cromwell/cromwell.truststore"
+#DB_ARGS="-Djavax.net.ssl.trustStorePassword=changeit -Djavax.net.ssl.trustStore=/gscmnt/gc2560/core/genome/cromwell/cromwell.truststore"
 CMD="/usr/bin/java -Dconfig.file=$CONFIG $DB_ARGS -jar $CROMWELL run -t cwl -i $YAML $CWL"
 
 if [ $DRYRUN ]; then

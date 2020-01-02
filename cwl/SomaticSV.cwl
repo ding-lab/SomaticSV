@@ -42,3 +42,5 @@ label: Somatic_SV_Workflow
 requirements:
   - class: DockerRequirement
     dockerPull: mwyczalkowski/somatic_sv_workflow
+  - class: ResourceRequirement
+    ramMin: 4000

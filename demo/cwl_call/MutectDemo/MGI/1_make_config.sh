@@ -1,7 +1,7 @@
 # Generate cromwell config file
 
-CONFIG_TEMPLATE="cromwell-config-db.template.dat"
-CONFIG_FILE="dat/cromwell-config-db.dat"
+CONFIG_TEMPLATE="config/cromwell-config.template.dat"
+CONFIG_FILE="dat/cromwell-config.dat"
 WORKFLOW_ROOT="/gscmnt/gc2619/dinglab_cptac3"
 
 >&2 echo Writing Cromwell config file to $CONFIG_FILE

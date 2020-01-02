@@ -9,9 +9,10 @@ Before running, be sure to uncompress reference in `../demo_data/MutectDemo-data
 
 
 # DEMO
-1. `0_start_docker-MGI_cromwell.sh`
-2. `1_make_config.sh"
-3. `2_run_cromwell.sh"
+1. `bash 0_start_docker-MGI_cromwell.sh`
+2. `bash 1_make_config.sh`
+3. edit `2_run_cromwell.sh`, modify `SSW_ROOT` parameter to point to base directory of `somatic_sv_workflow` project
+4. `bash 2_run_cromwell.sh`
 
 
 
