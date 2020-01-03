@@ -14,13 +14,18 @@ inputs:
     label: Tumor BAM
     secondaryFiles:
       - .bai
+#  - id: normal
+#    type: File
+#    inputBinding:
+#      position: 2
+#    label: Normal BAM
+#    secondaryFiles:
+#      - .bai
   - id: normal
     type: File
     inputBinding:
       position: 2
-    label: Normal BAM
-    secondaryFiles:
-      - .bai
+    secondaryFiles: ${if (self.nameext === ".bam") {return self.basename + ".bai"} else {return self.basename + ".crai"}}
   - id: reference
     type: File
     inputBinding:
