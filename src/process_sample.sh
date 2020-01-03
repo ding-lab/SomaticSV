@@ -15,6 +15,8 @@
 PYTHON="/usr/bin/python"
 MANTAD="/opt/conda/bin"
 
+export PYTHONPATH="$PYTHONPATH:/opt/conda/lib/python2.7/site-packages"
+
 # Set defaults
 OUTD="./output"
 OUTVCF="final.SV.WGS.vcf"
