@@ -9,6 +9,12 @@
 # -f output.vcf : specify output filename in manta results dir [ final.SV.WGS.vcf ]
 # -T : use test args, specific to "COST16011" data in testing/demo_data
 
+# In MGI environments, it is necessary to call python and find manta explicitly
+# /usr/bin/python /opt/conda/bin/configManta.py
+# This should generally work for the docker image
+PYTHON="/usr/bin/python"
+MANTAD="/opt/conda/bin"
+
 # Set defaults
 OUTD="./output"
 OUTVCF="final.SV.WGS.vcf"
@@ -91,7 +97,7 @@ if [ ! -e $REF ]; then
 fi
 
 # First configure manta
-configManta.py --tumorBam $TUMOR --normalBam $NORMAL --referenceFasta $REF --runDir $OUTD $TESTARGS
+$PYTHON $MANTAD/configManta.py --tumorBam $TUMOR --normalBam $NORMAL --referenceFasta $REF --runDir $OUTD $TESTARGS
 rc=$? # catch errors
 if [[ $rc != 0 ]]; then
     >&2 echo Fatal error $rc: $!.  Exiting.
@@ -102,7 +108,7 @@ fi
 
 
 # now run manta
-$OUTD/runWorkflow.py -m local -j $CPU
+$PYTHON $OUTD/runWorkflow.py -m local -j $CPU
 rc=$? # catch errors
 if [[ $rc != 0 ]]; then
     >&2 echo Fatal error $rc: $!.  Exiting.
@@ -116,8 +122,7 @@ VCF="$OUTD/results/variants/somaticSV.vcf.gz"
 # We place output file in the same directory as manta output
 OVCF="$OUTD/results/variants/$OUTVCF"
 
-python /usr/local/somatic_sv_workflow/filter_vcf.py $VCF $OVCF
-
+$PYTHON /usr/local/somatic_sv_workflow/filter_vcf.py $VCF $OVCF
 
 rc=$? # catch errors
 if [[ $rc != 0 ]]; then

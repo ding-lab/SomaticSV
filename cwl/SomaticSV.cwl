@@ -1,7 +1,5 @@
 class: CommandLineTool
 cwlVersion: v1.0
-$namespaces:
-  sbg: 'https://www.sevenbridges.com/'
 id: somatic_sv_workflow
 baseCommand:
   - bash
@@ -34,6 +32,6 @@ outputs:
 label: Somatic_SV_Workflow
 requirements:
   - class: DockerRequirement
-    dockerPull: mwyczalkowski/somatic_sv_workflow
+    dockerPull: mwyczalkowski/somatic_sv_workflow:20200102
   - class: ResourceRequirement
-    ramMin: 4000
+    ramMin: 8000

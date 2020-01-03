@@ -150,6 +150,8 @@ fi
 
 for CASE in $CASES
 do
+    >&2 echo Processing $CASE
+
     # analysis pre-summary
     PS_DATA=$(get_case_pre_summary $CASE $PRE_SUMMARY)
     test_exit_status
