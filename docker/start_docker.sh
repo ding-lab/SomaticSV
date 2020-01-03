@@ -1,6 +1,6 @@
 # Basic script to start docker container
 
-IMAGE="mwyczalkowski/somatic_sv_workflow"
+IMAGE="mwyczalkowski/somatic_sv_workflow:20200102"
 
 # Starting with no mounted volumes:
 docker run -it $IMAGE

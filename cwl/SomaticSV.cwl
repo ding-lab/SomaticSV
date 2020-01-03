@@ -2,8 +2,8 @@ class: CommandLineTool
 cwlVersion: v1.0
 id: somatic_sv_workflow
 baseCommand:
-  - bash
-  - /usr/local/somatic_sv_workflow/process_sample.sh
+  - /bin/bash
+  - /usr/local/somatic_sv_workflow/src/process_sample.sh
 inputs:
   - id: tumor
     type: File
