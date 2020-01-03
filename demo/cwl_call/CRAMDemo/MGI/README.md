@@ -31,3 +31,17 @@ t/workspace/alignmentStats.xml.tmpdir/alignmentStats.xml.000.xml --align-file /c
 ```
  -> was CWL updated to accept CRAM?  No, it was not.
  -> get CWL edits from TinDaisy 
+
+## Failure 2
+```
+[2020-01-03T02:52:27.658570Z] [blade17-4-7.gsc.wustl.edu] [27_1] [TaskManager] [ERROR] [2020-01-03T02:52:27.617794Z] [blade17-4-7.gsc.wustl.edu] [27_1] [getAlignmentStats_generat
+eStats_001] FATAL_ERROR: BAM/CRAM index is not available for file: '/cromwell-executions/SomaticSV.cwl/ddf79aa9-f356-45d5-afb7-5ad6b5ab2e0f/call-SomaticSV.cwl/inputs/1464018557/C
+PT0008520010.cram'
+[2020-01-03T02:52:27.658570Z] [blade17-4-7.gsc.wustl.edu] [27_1] [TaskManager] [ERROR] [2020-01-03T02:52:27.620542Z] [blade17-4-7.gsc.wustl.edu] [27_1] [getAlignmentStats_generat
+eStats_001] cmdline:    /opt/conda/share/manta-1.4.0-1/libexec/GetAlignmentStats --ref /cromwell-executions/SomaticSV.cwl/ddf79aa9-f356-45d5-afb7-5ad6b5ab2e0f/call-SomaticSV.cwl/
+inputs/593015123/GRCh38_full_analysis_set_plus_decoy_hla.fa --output-file /cromwell-executions/SomaticSV.cwl/ddf79aa9-f356-45d5-afb7-5ad6b5ab2e0f/call-SomaticSV.cwl/execution/out
+put/workspace/alignmentStats.xml.tmpdir/alignmentStats.xml.001.xml --align-file /cromwell-executions/SomaticSV.cwl/ddf79aa9-f356-45d5-afb7-5ad6b5ab2e0f/call-SomaticSV.cwl/inputs/
+1464018557/CPT0008520010.cram
+```
+
+Multiple CRAM needed?
