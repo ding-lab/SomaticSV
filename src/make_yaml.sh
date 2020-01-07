@@ -118,7 +118,7 @@ function test_exit_status {
 function get_BAM {
     CASE=$1
     ST=$2
-    REF="hg38"
+    REF="GRCh38_full_analysis_set_plus_decoy_hla"
     ES="WGS"
     # BAMMAP as global
 
