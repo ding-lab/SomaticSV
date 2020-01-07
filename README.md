@@ -16,6 +16,8 @@ Contact Matt Wyczalkowski (m.wyczalkowski@wustl.edu) with questions
 There are a number of ways to run SomaticSV workflow, as discussed in Development Notes below.  The following instructions
 are for running SomaticSV using Rabix Executor using a simple task manager, developed specifically for CPTAC3 analyses.
 
+Note that newer runs use Cromwell on MGI or compute1 systems, and are managed by [CromwellRunner](https://github.com/ding-lab/CromwellRunner)
+
 ## Installation
 
 **[Install Docker](https://www.docker.com/community-edition)**
