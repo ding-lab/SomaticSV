@@ -10,3 +10,5 @@ reference:
   class: File
   path: ../../demo_data/Homo_sapiens_assembly19.COST16011_region.fa
 
+generateEvidenceBam: true
+#dryrun: false

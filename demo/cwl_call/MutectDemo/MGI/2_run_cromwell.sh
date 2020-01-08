@@ -39,8 +39,7 @@ SSW_ROOT="/gscuser/mwyczalk/projects/CWL/somatic_sv_workflow"
 YAML="$SSW_ROOT/demo/cwl_call/MutectDemo/MutectDemo.yaml"
 CWL="$SSW_ROOT/cwl/SomaticSV.cwl"
 
-# Cromwell 35 in image  registry.gsc.wustl.edu/apipe-builder/genome_perl_environment:5
-CROMWELL="/opt/cromwell.jar"
+CROMWELL="/usr/local/cromwell/cromwell-47.jar"
 
 # Notes about DB below.  We are not using DB for this run
 # from https://confluence.ris.wustl.edu/pages/viewpage.action?spaceKey=CI&title=Cromwell#Cromwell-ConnectingtotheDatabase
