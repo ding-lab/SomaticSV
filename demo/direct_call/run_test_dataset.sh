@@ -1,9 +1,9 @@
 cd ../..
 
-TUMOR="testing/demo_data/G15512.HCC1954.1.COST16011_region.bam"
-NORMAL="testing/demo_data/HCC1954.NORMAL.30x.compare.COST16011_region.bam"
-REF="testing/demo_data/Homo_sapiens_assembly19.COST16011_region.fa"
-OUTD="/usr/local/somatic_sv_workflow/testing/output.tmp"
+TUMOR="demo/demo_data/G15512.HCC1954.1.COST16011_region.bam"
+NORMAL="demo/demo_data/HCC1954.NORMAL.30x.compare.COST16011_region.bam"
+REF="demo/demo_data/Homo_sapiens_assembly19.COST16011_region.fa"
+OUTD="demo/output.tmp"
 
 # uncompress REF if necessary 
 if [[ ! -e $REF && -e "$REF.tar.bz2" ]]; then
@@ -21,6 +21,6 @@ fi
 # These were obtained from :
 #	python /opt/conda/share/manta-1.4.0-1/bin/runMantaWorkflowDemo.py
 # Test goes much faster with this argument, but yields same result
-$ARGS="-T"
+#ARGS="-T"
 
-bash process_sample.sh $ARGS -o $OUTD $TUMOR $NORMAL $REF
+bash src/process_sample.sh $ARGS -o $OUTD $TUMOR $NORMAL $REF

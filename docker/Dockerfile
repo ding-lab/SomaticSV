@@ -17,13 +17,9 @@ USER root
 RUN conda install -y manta cyvcf2 
 RUN apt-get update && apt-get install -y vim
 
-ENV dummy 2     # Increment this to force `git clone`
-# This needs to be a copy not a git pull
-#RUN cd /usr/local \
-#    && git clone https://github.com/mwyczalkowski/somatic_sv_workflow.git
 COPY . /usr/local/somatic_sv_workflow
 
-
+ENV PYTHONPATH=/opt/conda/lib/python2.7/site-packages
 COPY docker/vimrc /root/.vimrc
 WORKDIR /usr/local/somatic_sv_workflow
 RUN /bin/bash -c "source activate base"
