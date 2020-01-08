@@ -24,6 +24,13 @@ inputs:
     label: Reference FASTA
     secondaryFiles:
       - .fai
+  - id: generateEvidenceBam
+    type: boolean?
+    inputBinding:
+      position: 0
+      prefix: '-C "--generateEvidenceBam"'
+    label: generateEvidenceBam
+    doc: Pass --generateEvidenceBam to Manta configuration
 outputs:
   - id: output
     type: File?
@@ -31,7 +38,8 @@ outputs:
       glob: output/results/variants/final.SV.WGS.vcf
 label: Somatic_SV_Workflow
 requirements:
-  - class: DockerRequirement
-    dockerPull: mwyczalkowski/somatic_sv_workflow:20200108
   - class: ResourceRequirement
     ramMin: 8000
+  - class: DockerRequirement
+    dockerPull: 'mwyczalkowski/somatic_sv_workflow:20200108'
+  - class: InlineJavascriptRequirement
