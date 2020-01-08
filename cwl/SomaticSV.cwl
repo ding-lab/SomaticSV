@@ -31,6 +31,13 @@ inputs:
       prefix: '-C "--generateEvidenceBam"'
     label: generateEvidenceBam
     doc: Pass --generateEvidenceBam to Manta configuration
+  - id: dryrun
+    type: boolean?
+    inputBinding:
+      position: 0
+      prefix: '-d'
+    label: dry run
+    doc: 'Print out commands but do not execute, for testing only'
 outputs:
   - id: output
     type: File?
