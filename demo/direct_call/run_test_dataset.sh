@@ -23,4 +23,4 @@ fi
 # Test goes much faster with this argument, but yields same result
 #ARGS="-T"
 
-bash src/process_sample.sh $ARGS -o $OUTD $TUMOR $NORMAL $REF
+bash src/process_sample.sh "$@" -o $OUTD $TUMOR $NORMAL $REF
