@@ -1,5 +1,0 @@
-Development of somatic_sv_workflow to accommodate UMich HNSCC project
-
-* ad hoc realignment to GRCh38 reference which differs from GDC's
-* CRAM file format
-* Running Rabix on katmai, data on storage1

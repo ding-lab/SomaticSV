@@ -1,4 +1,0 @@
-Development work for running somatic_sv on Cromwell
-* Aiming to integrate with CromwellRunner
-
-This branch is based on CRAM branch which lives on https://github.com/ding-lab/somatic_sv_workflow

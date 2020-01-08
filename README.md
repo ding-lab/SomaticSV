@@ -11,6 +11,12 @@ Contact Matt Wyczalkowski (m.wyczalkowski@wustl.edu) with questions
     - Somatic score is greater than 30
     - For a small variant (<1000 bases) in the normal sample, the fraction of reads with MAPQ0 around either breakend doesn't exceed 0.4
 
+## Cromwell updates
+
+Starting in January 2020 (cromwell branch) SomaticSV workflow is being run on Cromwell using CromwellRunner.
+Consequently, the simple workflow management under Rabix described below is being phased out, and this project
+is principally to develop and test the docker image 
+
 # Run Notes
 
 There are a number of ways to run SomaticSV workflow, as discussed in Development Notes below.  The following instructions
