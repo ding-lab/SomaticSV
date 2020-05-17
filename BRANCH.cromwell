@@ -1,2 +1,12 @@
 Development branch to update functionality with --generateEvidenceBam
 
+Starting May 2020 refactoring to be more consistent with CromwellRunner workflow
+* YAML file creation, run control, and analysis summary creation is handled by CromwellRunner and removed from here
+    * Copying old code to src/attic for reference
+* Development targets Cromwell on compute1
+
+# Reference implementations
+
+* https://github.com/ding-lab/SnpIndelProximityFilter
+    * Recent CWL tool implementation
+    * Use this model for general testing framework

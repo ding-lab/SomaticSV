@@ -1,8 +1,7 @@
 Several levels of calls available for testing
 * `direct_call`: Calling `process_sample.sh` directly from container`
 * `docker_call`: Instantiate docker container and call scripts within it
-* `cwl_call`: Run either Rabix or Cromwell workflow engines to process `somatic_sv_workflow.cwl`
-* `task_call`: run multiple jobs in Rabix environment using `parallel`
+* `cwl_call`: Run Cromwell workflow engine to process `SomaticSV.cwl`
 
 Before running Demo data, be sure to uncompress reference:
 ```
