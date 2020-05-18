@@ -48,5 +48,5 @@ requirements:
   - class: ResourceRequirement
     ramMin: 8000
   - class: DockerRequirement
-    dockerPull: 'mwyczalkowski/somatic_sv_workflow:20200108'
+    dockerPull: 'mwyczalkowski/somatic_sv:20200518'
   - class: InlineJavascriptRequirement
