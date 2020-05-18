@@ -15,7 +15,7 @@ START_DOCKERD="../../docker/WUDocker"  # https://github.com/ding-lab/WUDocker.gi
 VOLUME_MAPPING="../demo_data:/data"
 
 >&2 echo Launching $IMAGE on $SYSTEM
-CMD_OUTER="bash $START_DOCKERD/start_docker.sh -I $IMAGE -M $SYSTEM -c \"$CMD_INNER\" $VOLUME_MAPPING "
+CMD_OUTER="bash $START_DOCKERD/start_docker.sh -l -I $IMAGE -M $SYSTEM -c \"$CMD_INNER\" $VOLUME_MAPPING "
 echo Running: $CMD_OUTER
 eval $CMD_OUTER
 
