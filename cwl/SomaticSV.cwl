@@ -10,13 +10,19 @@ inputs:
     inputBinding:
       position: 1
     label: Tumor BAM
-    secondaryFiles: ${if (self.nameext === ".bam") {return self.basename + ".bai"} else {return self.basename + ".crai"}}
+    secondaryFiles:
+      - >-
+        ${if (self.nameext === ".bam") {return self.basename + ".bai"} else
+        {return self.basename + ".crai"}}
   - id: normal
     type: File
     inputBinding:
       position: 2
     label: Normal BAM
-    secondaryFiles: ${if (self.nameext === ".bam") {return self.basename + ".bai"} else {return self.basename + ".crai"}}
+    secondaryFiles:
+      - >-
+        ${if (self.nameext === ".bam") {return self.basename + ".bai"} else
+        {return self.basename + ".crai"}}
   - id: reference
     type: File
     inputBinding:
@@ -43,6 +49,10 @@ outputs:
     type: File?
     outputBinding:
       glob: output/results/variants/final.SV.WGS.vcf
+  - id: output_evidence
+    type: File?
+    outputBinding:
+      glob: output/results/evidence/*
 label: Somatic_SV_Workflow
 requirements:
   - class: ResourceRequirement
