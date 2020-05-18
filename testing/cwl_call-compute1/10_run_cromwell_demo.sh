@@ -14,6 +14,8 @@ CROMWELL="/usr/local/cromwell/cromwell-47.jar"
 ARGS="-Xmx10g"
 DB_ARGS="-Djavax.net.ssl.trustStorePassword=changeit -Djavax.net.ssl.trustStore=/home/m.wyczalkowski/lib/cromwell-jar/cromwell.truststore"
 
+# alternative: /storage1/fs1/bga/Active/gmsroot/gc2560/core/genome/cromwell/cromwell.truststore
+
 # from https://confluence.ris.wustl.edu/pages/viewpage.action?spaceKey=CI&title=Cromwell#Cromwell-ConnectingtotheDatabase
 # Connecting to the database section
 # Note also database section in config fil
