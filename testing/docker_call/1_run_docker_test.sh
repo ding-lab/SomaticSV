@@ -1,10 +1,21 @@
-IMAGE="mwyczalkowski/somatic_sv_workflow:20200108"
+source ../../docker/docker_image.sh
 
-# data will be with respect to container: this is test data contained within image
-TUMOR="demo/demo_data/G15512.HCC1954.1.COST16011_region.bam"
-NORMAL="demo/demo_data/HCC1954.NORMAL.30x.compare.COST16011_region.bam"
-REF="demo/demo_data/Homo_sapiens_assembly19.COST16011_region.fa"
+TUMOR="/data//G15512.HCC1954.1.COST16011_region.bam"
+NORMAL="/data/HCC1954.NORMAL.30x.compare.COST16011_region.bam"
+REF="/data/Homo_sapiens_assembly19.COST16011_region.fa"
 
-# The data generated here will generally be lost
-docker run $IMAGE bash src/process_sample.sh -C --generateEvidenceBam $TUMOR  $NORMAL  $REF 
-#docker run $IMAGE bash testing/direct_call/run_test_dataset.sh
+ARGS="-C --generateEvidenceBam"
+
+# This is what we want to run in docker
+CMD_INNER="/bin/bash /usr/local/SomaticSV/src/process_sample.sh $ARGS "$@" $TUMOR $NORMAL $REF"
+
+SYSTEM=docker   # docker MGI or compute1
+START_DOCKERD="../../docker/WUDocker"  # https://github.com/ding-lab/WUDocker.git
+
+VOLUME_MAPPING="../demo_data:/data"
+
+>&2 echo Launching $IMAGE on $SYSTEM
+CMD_OUTER="bash $START_DOCKERD/start_docker.sh -I $IMAGE -M $SYSTEM -c \"$CMD_INNER\" $VOLUME_MAPPING "
+echo Running: $CMD_OUTER
+eval $CMD_OUTER
+
