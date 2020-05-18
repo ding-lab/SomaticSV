@@ -1,1 +1,1 @@
-IMAGE="mwyczalkowski/somatic_sv:20200517"
+IMAGE="mwyczalkowski/somatic_sv:20200518"
