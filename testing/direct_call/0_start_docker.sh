@@ -3,8 +3,8 @@
 # this will define the image
 source ../../docker/docker_image.sh
 
-SYSTEM=compute1   # MGI and compute1
-IMAGE="mwyczalkowski/SomaticSV:20200513"
+#SYSTEM=compute1   # MGI, compute1, docker
+SYSTEM=docker   
 START_DOCKERD="../../docker/WUDocker"  # https://github.com/ding-lab/WUDocker.git
 
 VOLUME_MAPPING="../demo_data:/data"
