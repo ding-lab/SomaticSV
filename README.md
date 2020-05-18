@@ -22,9 +22,15 @@ is principally to develop and test the docker image
 There are a number of ways to run SomaticSV workflow, as discussed in Development Notes below.  
 In general, starting May 2020, SomaticSV is run using [CromwellRunner](https://github.com/ding-lab/CromwellRunner.git)
 
-**Install [SomaticSV](https://github.com/mwyczalkowski/SomaticSV.git)**
+Install [SomaticSV](https://github.com/ding-lab/SomaticSV.git)
 ```
-git clone --recursive https://github.com/mwyczalkowski/SomaticSV.git
+git clone --recurse-submodules https://github.com/ding-lab/SomaticSV.git
+```
+
+May need to get docker/WUDocker submodule:
+```
+git submodule init
+git submodule update
 ```
 
 # Development notes
