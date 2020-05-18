@@ -50,9 +50,15 @@ outputs:
     outputBinding:
       glob: output/results/variants/final.SV.WGS.vcf
   - id: output_evidence
-    type: File?
+    type:
+      - 'null'
+      - File
+      - type: array
+        items: File
     outputBinding:
-      glob: output/results/evidence/*
+      glob: output/results/evidence/*.bam
+    secondaryFiles:
+      - .bai
 label: Somatic_SV_Workflow
 requirements:
   - class: ResourceRequirement
