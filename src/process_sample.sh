@@ -148,7 +148,7 @@ VCF="$OUTD/results/variants/somaticSV.vcf.gz"
 # We place output file in the same directory as manta output
 OVCF="$OUTD/results/variants/$OUTVCF"
 
-CMD="$PYTHON /usr/local/somatic_sv_workflow/src/filter_vcf.py $VCF $OVCF"
+CMD="$PYTHON /usr/local/SomaticSV/src/filter_vcf.py $VCF $OVCF"
 if [ "$DRYRUN" ]; then
 	>&2 echo Dryrun: $CMD
 else

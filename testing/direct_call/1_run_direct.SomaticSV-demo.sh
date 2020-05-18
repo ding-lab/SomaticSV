@@ -1,5 +1,5 @@
 TUMOR="../demo_data/G15512.HCC1954.1.COST16011_region.bam"
-NORMAL="../HCC1954.NORMAL.30x.compare.COST16011_region.bam"
+NORMAL="../demo_data/HCC1954.NORMAL.30x.compare.COST16011_region.bam"
 REF="../demo_data/Homo_sapiens_assembly19.COST16011_region.fa"
 OUTD="output"
 

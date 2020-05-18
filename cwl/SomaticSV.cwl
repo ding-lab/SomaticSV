@@ -3,7 +3,7 @@ cwlVersion: v1.0
 id: somatic_sv_workflow
 baseCommand:
   - /bin/bash
-  - /usr/local/somatic_sv_workflow/src/process_sample.sh
+  - /usr/local/SomaticSV/src/process_sample.sh
 inputs:
   - id: tumor
     type: File
