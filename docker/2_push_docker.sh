@@ -1,4 +1,3 @@
-
-IMAGE="mwyczalkowski/somatic_sv_workflow:20200102"
+source docker_image.sh
 docker push $IMAGE
 

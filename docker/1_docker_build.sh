@@ -1,5 +1,6 @@
+source docker_image.sh
 
-IMAGE="mwyczalkowski/somatic_sv_workflow:20200102"
+>&2 echo Building $IMAGE
 
 cd ..
 docker build -t $IMAGE -f docker/Dockerfile .
