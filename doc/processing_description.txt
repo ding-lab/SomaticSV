@@ -1,5 +1,7 @@
 # Somatic SV Workflow
 
+Version 1.1
+
 - Manta 1.4.0
 - Filters: Only select the variants which pass the following criteria:
     - Sample site depth is less than 3x the median chromosome depth near one or both variant breakends
