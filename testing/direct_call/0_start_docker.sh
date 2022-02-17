@@ -1,17 +1,21 @@
 # Launch docker environment for testing SomaticSV
 
-# this will define the image
-source ../../docker/docker_image.sh
+# changing directories so entire project directory is mapped by default
+cd ../..
+source docker/docker_image.sh
+SYSTEM="docker" # appropriate for katmai
 
-#SYSTEM=compute1   # MGI, compute1, docker
-SYSTEM=docker   
-START_DOCKERD="../../docker/WUDocker"  # https://github.com/ding-lab/WUDocker.git
+# maps to /data
+DATAD="testing/demo_data"
 
-VOLUME_MAPPING="../demo_data:/data"
+# Maps to /results.  Make sure this directory exists
+OUTD="../output"
 
-# Also need: /storage1/fs1/dinglab/Active/CPTAC3/Common/CPTAC3.catalog
 >&2 echo Launching $IMAGE on $SYSTEM
-CMD="bash $START_DOCKERD/start_docker.sh -I $IMAGE -M $SYSTEM $@ $VOLUME_MAPPING"
+CMD="bash docker/WUDocker/start_docker.sh $@ -I $IMAGE -M $SYSTEM $DATAD:/data $OUTD:/results"
 echo Running: $CMD
 eval $CMD
+
+
+
 
