@@ -1,4 +1,5 @@
 FROM mwyczalkowski/somatic_sv:20200518
 
+RUN rm -rf /usr/local/SomaticSV
 COPY . /usr/local/SomaticSV
 WORKDIR /usr/local/SomaticSV
