@@ -3,7 +3,7 @@
 # Matthew Wyczalkowski <m.wyczalkowski@wustl.edu>
 # https://dinglab.wustl.edu/
 
-source utils.sh
+source src/utils.sh
 
 read -r -d '' USAGE <<'EOF'
 Run Manta SV caller, either tumor/normal or tumor-only modes
@@ -106,7 +106,11 @@ if [ ! -e $REF ]; then
 fi
 
 # First configure manta
-CMD="$PYTHON $MANTAD/configManta.py --tumorBam $TUMOR --normalBam $NORMAL --referenceFasta $REF --runDir $OUTD $CONFIG_ARGS"
+if [ -z $NORMAL ]; then
+    CMD="$PYTHON $MANTAD/configManta.py --tumorBam $TUMOR --referenceFasta $REF --runDir $OUTD $CONFIG_ARGS"
+else
+    CMD="$PYTHON $MANTAD/configManta.py --tumorBam $TUMOR --normalBam $NORMAL --referenceFasta $REF --runDir $OUTD $CONFIG_ARGS"
+fi
 run_cmd "$CMD"
 >&2 echo configManta.py success.
 

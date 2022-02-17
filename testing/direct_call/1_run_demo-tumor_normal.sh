@@ -5,7 +5,8 @@ REF="/data/Homo_sapiens_assembly19.COST16011_region.fa"
 OUTD="/results/tumor-normal"
 mkdir -p $OUTD
 
-CMD="/bin/bash /usr/local/SomaticSV/src/process_SomaticSV.sh "$@" -t $TUMOR -n $NORMAL -r $REF"
+cd ../..
+CMD="/bin/bash /usr/local/SomaticSV/src/process_SomaticSV.sh "$@" -t $TUMOR -n $NORMAL -r $REF -o $OUTD"
 echo Running $CMD
 eval $CMD
 
