@@ -1,0 +1,4 @@
+FROM mwyczalkowski/somatic_sv:20200518
+
+COPY . /usr/local/SomaticSV
+WORKDIR /usr/local/SomaticSV
