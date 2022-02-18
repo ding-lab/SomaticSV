@@ -1,0 +1,9 @@
+dryrun: false  # type "boolean" (optional)
+generateEvidenceBam: true  # type "boolean" (optional)
+
+reference:  # type "File"
+    class: File
+    path: /storage1/fs1/dinglab/Active/Projects/CPTAC3/Analysis/CromwellRunner/SomaticSV/14.tumor-only-dev/Workflow/SomaticSV/testing/demo_data/Homo_sapiens_assembly19.COST16011_region.fa
+tumor:  # type "File"
+    class: File
+    path: /storage1/fs1/dinglab/Active/Projects/CPTAC3/Analysis/CromwellRunner/SomaticSV/14.tumor-only-dev/Workflow/SomaticSV/testing/demo_data/G15512.HCC1954.1.COST16011_region.bam
