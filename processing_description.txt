@@ -2,7 +2,9 @@
 
 Version 1.1
 
-- Manta 1.4.0
+- Manta 1.6.0
+  - note, all results associated with v1.1, which used image mwyczalkowski/somatic_sv:20200518, was in fact Manta 1.6.0 rather
+    than 1.4.0 as was previously indicated
 - Filters: Only select the variants which pass the following criteria:
     - Sample site depth is less than 3x the median chromosome depth near one or both variant breakends
     - Somatic score is greater than 30
