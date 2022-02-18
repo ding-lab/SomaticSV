@@ -1,0 +1,8 @@
+dryrun: false  # type "boolean" (optional)
+generateEvidenceBam: false  # type "boolean" (optional)
+reference:  # type "File"
+    class: File
+    path: a/file/path
+tumor:  # type "File"
+    class: File
+    path: a/file/path
