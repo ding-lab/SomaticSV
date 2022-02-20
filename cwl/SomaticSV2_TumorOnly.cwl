@@ -43,7 +43,7 @@ outputs:
   - id: candidateSmallIndels
     type: File
     outputBinding:
-      glob: output/results/variants/results/variants/candidateSmallIndels.vcf.gz
+      glob: output/results/variants/candidateSmallIndels.vcf.gz
     secondaryFiles:
       - .tbi
   - id: output_evidence
