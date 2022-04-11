@@ -5,9 +5,8 @@ svbeta branch includes:
 * Does not filter results at this point
   * filtering module will be added as a separate CWL tool
   * Could use existing filters for this as well (Canonical filter)
-* Allows for tumor-only mode for Manta 1.4.0, as described here:
+* Allows for tumor-only mode for Manta 1.6.0, as described here:
     https://github.com/Illumina/manta/blob/master/docs/userGuide/README.md#unpaired-tumor-sample
-
 
 Output of two modes:
 
