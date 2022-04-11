@@ -5,7 +5,7 @@ source /opt/ibm/lsfsuite/lsf/conf/lsf.conf
 
 CWL="../../../cwl/SomaticSV2_TumorNormal.cwl"
 
-CONFIG="config/cromwell-config-db.compute1.dat"
+CONFIG="config/cromwell-config-db.compute1-filedb.dat"
 YAML="config/SomaticSV2_TumorNormal.Demo.yaml"
 
 
