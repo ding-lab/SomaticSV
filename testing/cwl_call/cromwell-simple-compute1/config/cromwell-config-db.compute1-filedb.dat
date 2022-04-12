@@ -75,7 +75,8 @@ database {
   db {
     driver = "org.hsqldb.jdbcDriver"
     url = """
-    jdbc:hsqldb:file:cromwell-executions/cromwell-db/cromwell-db;
+    jdbc:hsqldb:file:/scratch1/fs1/dinglab/m.wyczalkowski/cromwell-data/cromwell-workdir/cromwell-executions/cromwell-db/cromwell-db;
+#        root = "/scratch1/fs1/dinglab/m.wyczalkowski/cromwell-data/cromwell-workdir/cromwell-executions"
     shutdown=false;
     hsqldb.default_table_type=cached;hsqldb.tx=mvcc;
     hsqldb.result_max_memory_rows=10000;
