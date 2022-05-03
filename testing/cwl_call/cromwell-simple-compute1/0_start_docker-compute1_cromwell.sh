@@ -1,4 +1,4 @@
-IMAGE="mwyczalkowski/cromwell-runner"
+IMAGE="mwyczalkowski/cromwell-runner:v78"
 
 PWD=$(pwd)
 CWL_ROOT_H=$PWD/../../..

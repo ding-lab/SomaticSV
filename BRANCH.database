@@ -1,2 +1,4 @@
 Investigating use of file-based database for Cromwell runs, using test data as example.  See
 "Using Cromwell with file-based database" section of https://cromwell.readthedocs.io/en/stable/Configuring/
+
+Also implementing cromwell v78 in testing/cwl_call/cromwell-simple-compute1/1_run_cromwell-tumor_normal_demo.sh
