@@ -8,15 +8,16 @@ CWL="../../../cwl/SomaticSV2_TumorNormal.cwl"
 CONFIG="config/cromwell-config-db.compute1-filedb.dat"
 YAML="config/SomaticSV2_TumorNormal.Demo.yaml"
 
-
 JAVA="/opt/java/openjdk/bin/java"
 CROMWELL="/app/cromwell-78-38cd360.jar"
 
-# from https://confluence.ris.wustl.edu/pages/viewpage.action?spaceKey=CI&title=Cromwell#Cromwell-ConnectingtotheDatabase
-# Connecting to the database section
-# Note also database section in config file
-#DB_ARGS="-Djavax.net.ssl.trustStorePassword=changeit -Djavax.net.ssl.trustStore=/gscmnt/gc2560/core/genome/cromwell/cromwell.truststore"
-CMD="$JAVA -Dconfig.file=$CONFIG $DB_ARGS -jar $CROMWELL run -t cwl -i $YAML $CWL"
+if [ ! -e $CONFIG ]; then
+	>&2 echo ERROR: configuration file $CONFIG does not exist
+	>&2 echo Please create it from template
+	exit 1
+fi
+
+CMD="$JAVA -Dconfig.file=$CONFIG -jar $CROMWELL run -t cwl -i $YAML $CWL"
 
 echo Running: $CMD
 eval $CMD
