@@ -1,7 +1,7 @@
 class: Workflow
 cwlVersion: v1.0
-id: somaticsv_1_5
-label: SomaticSV-1.5
+id: somaticsv_1_3
+label: SomaticSV-1.3
 inputs:
   - id: normal
     type: File
