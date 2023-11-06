@@ -17,12 +17,14 @@ outputs:
   - id: bedpe
     type: File
     outputBinding:
-      glob: results/final.SV.WGS.bedpe
+      glob: final.SV.WGS.bedpe
 label: vcftobedpe
 arguments:
   - position: 0
     prefix: '-o'
-    valueFrom: results/final.SV.WGS.bedpe
+    valueFrom: final.SV.WGS.bedpe
 requirements:
   - class: DockerRequirement
     dockerPull: 'halllab/svtools:v0.5.1'
+  - class: ResourceRequirement
+    ramMin: 8000

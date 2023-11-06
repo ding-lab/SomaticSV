@@ -1,5 +1,10 @@
 # Somatic SV Workflow
 
+Version 1.3
+- Additional output written in bedpe format
+  - conversion of VCF to bedpe performed with `svtools vcftobedpe`
+  - svtools v0.5.1 https://github.com/hall-lab/svtools
+
 Version 1.2
 - Manta 1.6.0
   - note, all results associated with v1.2, which used image mwyczalkowski/somatic_sv:20200518, was in fact Manta 1.6.0 rather

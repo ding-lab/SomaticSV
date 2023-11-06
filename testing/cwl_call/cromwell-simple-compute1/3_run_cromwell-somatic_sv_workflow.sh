@@ -3,7 +3,8 @@
 
 source /opt/ibm/lsfsuite/lsf/conf/lsf.conf
 
-CWL="../../../cwl/SomaticSV.cwl"
+#CWL="../../../cwl/SomaticSV.cwl"
+CWL="../../../cwl/somaticsv-1-5.cwl"
 
 CONFIG="config/cromwell-config-db.compute1-filedb.dat"
 YAML="config/SomaticSV2_TumorNormal.Demo.yaml"  # Same YAML file
