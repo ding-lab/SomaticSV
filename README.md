@@ -26,8 +26,6 @@ Versions are those indicated in DCC Analysis Summary for CPTAC3 project
   * this is the version used for CPTAC3 processing
 * Docker image: mwyczalkowski/somatic_sv:20200518
 * Manta 1.6.0
-  * note, all results associated with v1.2, which used image mwyczalkowski/somatic_sv:20200518, was in fact Manta 1.6.0 rather
-    than 1.4.0 as was previously indicated
 * Filters: Only select the variants from somaticSV.vcf.gz output which pass the following criteria:
     * Sample site depth is less than 3x the median chromosome depth near one or both variant breakends
     * Somatic score is greater than 30
