@@ -6,3 +6,6 @@ reference:  # type "File"
 tumor:  # type "File"
     class: File
     path: a/file/path
+callRegions:  # type "File"
+    class: File
+    path: a/file/path

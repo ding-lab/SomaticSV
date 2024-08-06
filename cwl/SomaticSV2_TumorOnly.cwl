@@ -1,7 +1,5 @@
 class: CommandLineTool
 cwlVersion: v1.0
-$namespaces:
-  sbg: 'https://www.sevenbridges.com/'
 id: somatic_sv2_tumor_only
 baseCommand:
   - /bin/bash
@@ -39,6 +37,12 @@ inputs:
       prefix: '-d'
     label: dry run
     doc: 'Print out commands but do not execute, for testing only'
+  - id: callRegions
+    type: File?
+    inputBinding:
+      position: 0
+      prefix: '--callRegions'
+    label: callRegions
 outputs:
   - id: candidateSmallIndels
     type: File
