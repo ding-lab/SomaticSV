@@ -41,8 +41,11 @@ inputs:
     type: File?
     inputBinding:
       position: 0
-      prefix: '--callRegions'
+      prefix: '-C --callRegions='
+      separate: false
     label: callRegions
+    secondaryFiles:
+      - .tbi
 outputs:
   - id: candidateSmallIndels
     type: File

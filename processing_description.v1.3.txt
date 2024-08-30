@@ -19,5 +19,6 @@ Version 1.1
 - Manta 1.4.0 with tumor and normal sequence data
 - Filtering as in v1.2, no BAM evidence files returned
 
+[Manta](https://github.com/Illumina/manta/blob/master/docs/userGuide/README.md)
 [GitHub](https://github.com/ding-lab/SomaticSV.git)
 Contact Matt Wyczalkowski (m.wyczalkowski@wustl.edu) with questions
